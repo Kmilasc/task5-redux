@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import './styles.css';
+import styles from './register.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useRegisterMutation } from '../../services/slices/authApi';
 import { useEffect } from 'react';
@@ -10,10 +10,7 @@ interface NewUser {
   email: string;
 }
 
-// TODO: Add loader
-// TODO: Make it pretty
-// TODO: Do a responsive design
-export function Register() {
+export function RegisterPage() {
   const { register, handleSubmit, formState: { errors, isValid } } = useForm<NewUser>();
   const navigate = useNavigate()
   const [registerMutation, { isLoading, isSuccess }] = useRegisterMutation();
@@ -27,34 +24,37 @@ export function Register() {
   }, [isSuccess, navigate])
 
   return (
-    <div className="register-container">
+    <div className={styles.registerContainer}>
       <h2>Register</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label>Username:</label>
           <input
             type="text"
             {...register("username", { required: 'Username é obrigatório' })}
+            className={errors.username ? styles.inputError : ''}
           />
-          {errors.username && <p>{errors.username.message}</p>}
+          {errors.username && <p className={styles.errorMsg}>{errors.username.message}</p>}
         </div>
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label>Email:</label>
           <input
             type="email"
             {...register("email", { required: 'Email é obrigatório' })}
+            className={errors.email ? styles.inputError : ''}
           />
-          {errors.email && <p>{errors.email.message}</p>}
+          {errors.email && <p className={styles.errorMsg}>{errors.email.message}</p>}
         </div>
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label>Password:</label>
           <input
             type="password"
             {...register("password", { required: 'Senha é obrigatória' })}
+            className={errors.password ? styles.inputError : ''}
           />
-          {errors.password && <p>{errors.password.message}</p>}
+          {errors.password && <p className={styles.errorMsg}>{errors.password.message}</p>}
         </div>
-        <button type="submit" disabled={isLoading || !isValid}>Register</button>
+        <button type="submit" disabled={isLoading || !isValid} className={styles.submitButton}>Register</button>
       </form>
     </div>
   );
