@@ -1,3 +1,10 @@
+:root {
+  --text: #000000;
+  --text-light: #ffffff;
+  --background: #fafafa;
+  --primary: #EACA98;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
