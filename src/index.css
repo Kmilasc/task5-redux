@@ -12,3 +12,13 @@
   margin: 0;
   padding: 0;
 }
+
+html {
+  height: 100%;
+  display: flex;
+}
+
+body, div#root {
+  display: flex;
+  flex: 1;
+}
