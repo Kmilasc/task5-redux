@@ -5,11 +5,6 @@ interface Credentials {
     password: string;
 }
 
-interface NewUser {
-    username: string;
-    password: string;
-    email: string;
-}
 
 export const authApi = createApi({
     reducerPath: 'authApi',
@@ -22,7 +17,7 @@ export const authApi = createApi({
                 body: credentials
             }),
         }),
-        register: builder.mutation<void, NewUser>({
+        register: builder.mutation<void, Credentials>({
             query: (newUser) => ({
                 url: '/register',
                 method: 'POST',
