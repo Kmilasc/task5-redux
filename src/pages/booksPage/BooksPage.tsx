@@ -12,11 +12,10 @@ import { Book } from "../../interfaces/bookApiInterface";
 export function BooksPage(): JSX.Element {
 
     const { data: booksList, error, isLoading } = useGetBooksQuery('technology');
-    const books = useAppSelector((state: RootState) => state.books.items);
-    const { inCart, items } = useAppSelector((state: RootState) => state.shoppingCart);
+    const { items: books, searchTerm } = useAppSelector((state: RootState) => state.books);
+    
+    const { items } = useAppSelector((state: RootState) => state.shoppingCart);
     const dispatch = useAppDispatch();
-
-    // const [inCart, setInCart] = useState<boolean>(false);
 
     useEffect(() => {
         if (booksList) {
@@ -28,10 +27,6 @@ export function BooksPage(): JSX.Element {
 
     const bookInCart = (id: string): boolean => items.some(book => book.id === id);
 
-    useEffect(() => {
-        console.log(items);
-    }, [items]);
-
 
     function handleChangeShoppingCart(book: Book): void {
         if(!bookInCart(book.id)){
@@ -41,6 +36,9 @@ export function BooksPage(): JSX.Element {
             dispatch(decrementItem(book.id));
         }
     }
+
+    const filteredBooks = books
+        .filter(book => book.volumeInfo.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
 
     return (
@@ -53,7 +51,7 @@ export function BooksPage(): JSX.Element {
 
                 <h2 className={styles.title}>Confira os livros disponíveis para compra</h2>
                 <section className={styles.sectionContainer}>
-                    {books && books.map((book) => (
+                    {filteredBooks && filteredBooks.map((book) => (
                         <div key={book.id} className={styles.card}>
                             {book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail ? (
                                 <img

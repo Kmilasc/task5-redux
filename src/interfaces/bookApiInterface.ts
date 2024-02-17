@@ -14,5 +14,7 @@ export interface Book {
 }
 
 export interface BookResponse {
-    items: Book[]
+    items: Book[],
+    searchTerm: string
 }
+
