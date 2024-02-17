@@ -1,16 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useGetBooksQuery } from "../../services/slices/booksApiSlice"
 import { useAppDispatch, useAppSelector } from "../../services/hooks/hooks";
 import { RootState } from "../../services/store/store";
 import { setBooks } from "../../services/slices/booksSlice";
 import styles from './books.module.css';
 import { Header } from "../../components/header/Header";
+import { ShoppingCartCheckoutOutlined, Check } from "@mui/icons-material"
+import { decrementItem, incrementItem } from "../../services/slices/shoppingCartSlice";
+import { Book } from "../../interfaces/bookApiInterface";
 
 export function BooksPage(): JSX.Element {
 
     const { data: booksList, error, isLoading } = useGetBooksQuery('technology');
     const books = useAppSelector((state: RootState) => state.books.items);
+    const { inCart, items } = useAppSelector((state: RootState) => state.shoppingCart);
     const dispatch = useAppDispatch();
+
+    // const [inCart, setInCart] = useState<boolean>(false);
 
     useEffect(() => {
         if (booksList) {
@@ -18,6 +24,23 @@ export function BooksPage(): JSX.Element {
         }
 
     }, [booksList, dispatch]);
+
+
+    const bookInCart = (id: string): boolean => items.some(book => book.id === id);
+
+    useEffect(() => {
+        console.log(items);
+    }, [items]);
+
+
+    function handleChangeShoppingCart(book: Book): void {
+        if(!bookInCart(book.id)){
+            dispatch(incrementItem(book));
+        }
+        else {
+            dispatch(decrementItem(book.id));
+        }
+    }
 
 
     return (
@@ -41,9 +64,17 @@ export function BooksPage(): JSX.Element {
                                 <div >Sem imagem disponível</div>
                             )}
                             <div className={styles.bookInfoContainer}>
-                                <h3>{book.volumeInfo.title}</h3>
-                                <p>Data de lançamento: {book.volumeInfo.publishedDate.split("-").reverse().join("/")}</p>
+                                <h3 className={styles.bookTitle}>{book.volumeInfo.title}</h3>
+                                <p className={styles.releaseDate}>Data de lançamento: {book.volumeInfo.publishedDate.split("-").reverse().join("/")}</p>
                             </div>
+
+                            <button className={styles.button} onClick={() => handleChangeShoppingCart(book)}>
+                                {bookInCart(book.id) ?
+                                    <Check /> :
+                                    <span>Adicionar ao carrinho <ShoppingCartCheckoutOutlined /></span>
+                                }
+                               
+                            </button>
                         </div>
                     ))}
                 </section>
