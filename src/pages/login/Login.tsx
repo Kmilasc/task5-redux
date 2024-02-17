@@ -10,21 +10,15 @@ interface FormData {
 }
 
 // TODO: Add loader
-// TODO: Add error handling
 // TODO: Make it pretty
 // TODO: Do a responsive design
 export function LoginPage() {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm<FormData>();
   const navigate = useNavigate()
-  
   const [login, { isLoading, isSuccess }] = useLoginMutation();
 
-  const onSubmit = async (data: FormData) => {
-    try {
-      await login(data).unwrap();
-    } catch (error) {
-      console.error('Failed to login: ', error);
-    }
+  const onSubmit = (data: FormData) => {
+    login(data).unwrap();
   };
 
   useEffect(() => {
@@ -51,7 +45,7 @@ export function LoginPage() {
           />
           {errors.password && <p>{errors.password.message}</p>}
         </div>
-        <button type="submit" disabled={isLoading}>Entrar</button>
+        <button type="submit" disabled={isLoading || !isValid}>Entrar</button>
       </form>
     </div>
   );
