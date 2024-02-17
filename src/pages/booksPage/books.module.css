@@ -40,7 +40,7 @@
     text-align: center;
 }
 
-.releaseDate {
+.releaseDate, .bookPrice {
     text-align: center;
 }
 
