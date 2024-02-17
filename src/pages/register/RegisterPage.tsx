@@ -11,7 +11,7 @@ export function RegisterPage() {
   const [registerMutation, { isLoading, isSuccess }] = useRegisterMutation();
 
   useEffect(() => {
-    isSuccess && navigate('/login')
+    isSuccess && navigate('/')
   }, [isSuccess, navigate])
 
   return (
@@ -38,7 +38,7 @@ export function RegisterPage() {
         </div>
         <button type="submit" disabled={isLoading || !isValid} className={styles.submitButton}>Registrar</button>
       </form>
-      <p className={styles.loginLink}>Já tem uma conta? <Link to="/login">Faça login aqui</Link></p>
+      <p className={styles.loginLink}>Já tem uma conta? <Link to="/">Faça login aqui</Link></p>
     </div>
   );
 };
