@@ -6,7 +6,7 @@ export const bookApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'https://www.googleapis.com/books/v1/' }),
     endpoints: (builder) => ({
         getBooks: builder.query<Book[], string>({
-            query: (query) => `/volumes?q=${query}`,
+            query: (theme) => `/volumes?q=${theme}&maxResults=20`,
             transformResponse: (response: BookResponse) => response.items
         })
     })

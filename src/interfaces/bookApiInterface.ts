@@ -1,9 +1,11 @@
+type image = {
+    thumbnail: string
+}
+
 interface VolumeProps {
     title: string,
     publishedDate: string
-    imageLinks: {
-        thumbnail: string
-    }
+    imageLinks: image
 }
 
 export interface Book {
