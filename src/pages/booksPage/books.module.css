@@ -25,6 +25,7 @@
     align-items: center;
     background-color: var(--primary);
     padding: 1rem;
+    border-radius: 8px;
 }
 
 .bookInfoContainer {
@@ -32,4 +33,34 @@
     flex-direction: column;
     gap: 0.5rem;
     margin: 1rem 0;
+}
+
+.bookTitle {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.releaseDate {
+    text-align: center;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    height: 40px;
+    width: 15rem;
+    border: none;
+    background-color: var(--accent);
+    border-radius: 8px;
+    color: var(--text-light);
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.button > span {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
