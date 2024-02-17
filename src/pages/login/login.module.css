@@ -1,10 +1,11 @@
 .loginContainer {
+    background-color: #f3f3f3;
     align-self: center;
     max-width: 600px;
     min-width: 400px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #b1b1b1;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
@@ -68,4 +69,18 @@ input {
 
 .submitButton:hover {
     background-color: #0056b3;
+}
+
+.registerLink {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+.registerLink a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.registerLink a:hover {
+    text-decoration: underline;
 }

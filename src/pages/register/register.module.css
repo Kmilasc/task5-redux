@@ -4,7 +4,7 @@
     min-width: 400px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #dddddd;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
@@ -68,4 +68,18 @@ input {
 
 .submitButton:hover {
     background-color: #0056b3;
+}
+
+.loginLink {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+.loginLink a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.loginLink a:hover {
+    text-decoration: underline;
 }
