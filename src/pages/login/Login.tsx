@@ -8,11 +8,15 @@ import { Credentials } from '../../interfaces/authApiInterface';
 export function LoginPage() {
   const { register, handleSubmit, formState: { errors, isValid } } = useForm<Credentials>();
   const navigate = useNavigate()
-  const [login, { isLoading, isSuccess }] = useLoginMutation();
+  const [login, { isLoading, isSuccess, data }] = useLoginMutation();
 
   useEffect(() => {
-    isSuccess && navigate('/home')
-  }, [isSuccess, navigate])
+    if(isSuccess && data && 'token' in data) {
+      const token = data.token;
+      localStorage.setItem('token', token);
+      navigate('/home');
+    }
+  }, [isSuccess, navigate]);
 
   return (
     <div className={styles.loginContainer}>
