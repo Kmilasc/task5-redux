@@ -69,3 +69,17 @@ input {
 .submitButton:hover {
     background-color: #0056b3;
 }
+
+.loginLink {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+.loginLink a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.loginLink a:hover {
+    text-decoration: underline;
+}

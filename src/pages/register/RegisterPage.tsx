@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import styles from './register.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useRegisterMutation } from '../../services/slices/authApi';
 import { useEffect } from 'react';
 
@@ -20,7 +20,7 @@ export function RegisterPage() {
 
   return (
     <div className={styles.registerContainer}>
-      <h2>Register</h2>
+      <h2>Registro</h2>
       <form onSubmit={handleSubmit(registerMutation)}>
         <div className={styles.formGroup}>
           <label>Email:</label>
@@ -32,7 +32,7 @@ export function RegisterPage() {
           {errors.email && <p className={styles.errorMsg}>{errors.email.message}</p>}
         </div>
         <div className={styles.formGroup}>
-          <label>Password:</label>
+          <label>Senha:</label>
           <input
             type="password"
             {...register("password", { required: 'Senha é obrigatória' })}
@@ -40,8 +40,9 @@ export function RegisterPage() {
           />
           {errors.password && <p className={styles.errorMsg}>{errors.password.message}</p>}
         </div>
-        <button type="submit" disabled={isLoading || !isValid} className={styles.submitButton}>Register</button>
+        <button type="submit" disabled={isLoading || !isValid} className={styles.submitButton}>Registrar</button>
       </form>
+      <p className={styles.loginLink}>Já tem uma conta? <Link to="/login">Faça login aqui</Link></p>
     </div>
   );
 };

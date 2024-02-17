@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import styles from './login.module.css';
 import { useLoginMutation } from '../../services/slices/authApi';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 interface FormData {
   email: string;
@@ -42,6 +42,7 @@ export function LoginPage() {
         </div>
         <button type="submit" disabled={isLoading || !isValid} className={styles.submitButton}>Entrar</button>
       </form>
+      <p className={styles.registerLink}>Ainda não tem uma conta? <Link to="/register">Registre-se aqui</Link></p>
     </div>
   );
 };
