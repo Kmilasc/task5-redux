@@ -1,16 +1,23 @@
 import { useForm } from 'react-hook-form';
 import './login.module.css';
 import { useLoginMutation } from '../../services/slices/authApi';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface FormData {
   email: string;
   password: string;
 }
 
+// TODO: Add loader
+// TODO: Add error handling
+// TODO: Make it pretty
+// TODO: Do a responsive design
 export function LoginPage() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
-
-  const [login, { isLoading }] = useLoginMutation();
+  const navigate = useNavigate()
+  
+  const [login, { isLoading, isSuccess }] = useLoginMutation();
 
   const onSubmit = async (data: FormData) => {
     try {
@@ -20,6 +27,9 @@ export function LoginPage() {
     }
   };
 
+  useEffect(() => {
+    isSuccess && navigate('/home')
+  }, [isSuccess, navigate])
 
   return (
     <div className="login-container">
