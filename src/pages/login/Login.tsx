@@ -3,14 +3,10 @@ import styles from './login.module.css';
 import { useLoginMutation } from '../../services/slices/authApi';
 import { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-
-interface FormData {
-  email: string;
-  password: string;
-}
+import { Credentials } from '../../interfaces/authApiInterface';
 
 export function LoginPage() {
-  const { register, handleSubmit, formState: { errors, isValid } } = useForm<FormData>();
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm<Credentials>();
   const navigate = useNavigate()
   const [login, { isLoading, isSuccess }] = useLoginMutation();
 

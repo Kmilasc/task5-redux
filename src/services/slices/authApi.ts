@@ -1,10 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-interface Credentials {
-    email: string;
-    password: string;
-}
-
+import { Credentials } from '../../interfaces/authApiInterface';
 
 export const authApi = createApi({
     reducerPath: 'authApi',

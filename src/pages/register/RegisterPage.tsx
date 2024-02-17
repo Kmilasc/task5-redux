@@ -3,14 +3,10 @@ import styles from './register.module.css';
 import { useNavigate, Link } from 'react-router-dom';
 import { useRegisterMutation } from '../../services/slices/authApi';
 import { useEffect } from 'react';
-
-interface NewUser {
-  password: string;
-  email: string;
-}
+import { Credentials } from '../../interfaces/authApiInterface';
 
 export function RegisterPage() {
-  const { register, handleSubmit, formState: { errors, isValid } } = useForm<NewUser>();
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm<Credentials>();
   const navigate = useNavigate()
   const [registerMutation, { isLoading, isSuccess }] = useRegisterMutation();
 
