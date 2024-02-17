@@ -21,30 +21,32 @@ export function RegisterPage() {
   }, [isSuccess, navigate])
 
   return (
-    <div className={styles.registerContainer}>
-      <h2>Registro</h2>
-      <form onSubmit={handleSubmit(registerMutation)}>
-        <div className={styles.formGroup}>
-          <label>Email:</label>
-          <input
-            type="email"
-            {...register("email", { required: 'Email é obrigatório' })}
-            className={errors.email ? styles.inputError : ''}
-          />
-          {errors.email && <p className={styles.errorMsg}>{errors.email.message}</p>}
-        </div>
-        <div className={styles.formGroup}>
-          <label>Senha:</label>
-          <input
-            type="password"
-            {...register("password", { required: 'Senha é obrigatória' })}
-            className={errors.password ? styles.inputError : ''}
-          />
-          {errors.password && <p className={styles.errorMsg}>{errors.password.message}</p>}
-        </div>
-        <button type="submit" disabled={isLoading || !isValid} className={styles.submitButton}>Registrar</button>
-      </form>
-      <p className={styles.loginLink}>Já tem uma conta? <Link to="/">Faça login aqui</Link></p>
-    </div>
+    <main className={styles.mainContainer}>
+      <div className={styles.registerContainer}>
+        <h2>Registro</h2>
+        <form onSubmit={handleSubmit(registerMutation)}>
+          <div className={styles.formGroup}>
+            <label>Email:</label>
+            <input
+              type="email"
+              {...register("email", { required: 'Email é obrigatório' })}
+              className={errors.email ? styles.inputError : ''}
+            />
+            {errors.email && <p className={styles.errorMsg}>{errors.email.message}</p>}
+          </div>
+          <div className={styles.formGroup}>
+            <label>Senha:</label>
+            <input
+              type="password"
+              {...register("password", { required: 'Senha é obrigatória' })}
+              className={errors.password ? styles.inputError : ''}
+            />
+            {errors.password && <p className={styles.errorMsg}>{errors.password.message}</p>}
+          </div>
+          <button type="submit" disabled={isLoading || !isValid} className={styles.submitButton}>Registrar</button>
+        </form>
+        <p className={styles.loginLink}>Já tem uma conta? <Link to="/">Faça login aqui</Link></p>
+      </div>
+    </main>
   );
 };

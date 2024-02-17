@@ -6,18 +6,21 @@ import { PrivateArea } from './layout/PrivateArea';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route />
-        
-        <Route path='/' element={<LoginPage />} />
-        <Route path='/register' element={<RegisterPage />} />
+    <div className='app-container'>
+      <BrowserRouter>
+        <Routes>
+          <Route />
 
-        <Route path='/' element={<PrivateArea />}>
-          <Route path='home' element={<BooksPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+          <Route path='/' element={<LoginPage />} />
+          <Route path='/register' element={<RegisterPage />} />
+
+          <Route path='/' element={<PrivateArea />}>
+            <Route path='home' element={<BooksPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
+
   );
 }
 
