@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../services/hooks/hooks";
 import { RootState } from "../../services/store/store";
 import { setBooks } from "../../services/slices/booksSlice";
 import styles from './books.module.css';
+import { Header } from "../../components/header/Header";
 
 export function BooksPage(): JSX.Element {
 
@@ -22,6 +23,8 @@ export function BooksPage(): JSX.Element {
     return (
         <>
             {isLoading && <div>Loading...</div>}
+
+            <Header />
 
             <main className={styles.mainContainer}>
 
