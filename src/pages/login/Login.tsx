@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import './login.module.css';
+import styles from './login.module.css';
 import { useLoginMutation } from '../../services/slices/authApi';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -9,43 +9,38 @@ interface FormData {
   password: string;
 }
 
-// TODO: Add loader
-// TODO: Make it pretty
-// TODO: Do a responsive design
 export function LoginPage() {
   const { register, handleSubmit, formState: { errors, isValid } } = useForm<FormData>();
   const navigate = useNavigate()
   const [login, { isLoading, isSuccess }] = useLoginMutation();
-
-  const onSubmit = (data: FormData) => {
-    login(data).unwrap();
-  };
 
   useEffect(() => {
     isSuccess && navigate('/home')
   }, [isSuccess, navigate])
 
   return (
-    <div className="login-container">
+    <div className={styles.loginContainer}>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-group">
+      <form onSubmit={handleSubmit(login)}>
+        <div className={styles.formGroup}>
           <label>Email:</label>
           <input
             type="email"
             {...register("email", { required: 'Email é obrigatório' })}
+            className={errors.email ? styles.inputError : ''}
           />
-          {errors.email && <p>{errors.email.message}</p>}
+          {errors.email && <p className={styles.errorMsg}>{errors.email.message}</p>}
         </div>
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label>Senha:</label>
           <input
             type="password"
             {...register("password", { required: 'Senha é obrigatória' })}
+            className={errors.password ? styles.inputError : ''}
           />
-          {errors.password && <p>{errors.password.message}</p>}
+          {errors.password && <p className={styles.errorMsg}>{errors.password.message}</p>}
         </div>
-        <button type="submit" disabled={isLoading || !isValid}>Entrar</button>
+        <button type="submit" disabled={isLoading || !isValid} className={styles.submitButton}>Entrar</button>
       </form>
     </div>
   );
