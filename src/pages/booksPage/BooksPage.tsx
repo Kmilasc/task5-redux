@@ -18,8 +18,14 @@ export function BooksPage(): JSX.Element {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
+
         if (booksList) {
-            dispatch(setBooks(booksList));
+            const booksWithPrices: Book[] = booksList.map(book => ({
+                ...book,
+                price: Math.floor(Math.random() * 50)
+            }))
+
+            dispatch(setBooks(booksWithPrices));
         }
 
     }, [booksList, dispatch]);
@@ -36,6 +42,10 @@ export function BooksPage(): JSX.Element {
             dispatch(decrementItem(book.id));
         }
     }
+
+    useEffect(() => {
+        console.log(items);
+    }, [items])
 
     const filteredBooks = books
         .filter(book => book.volumeInfo.title.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -64,6 +74,7 @@ export function BooksPage(): JSX.Element {
                             <div className={styles.bookInfoContainer}>
                                 <h3 className={styles.bookTitle}>{book.volumeInfo.title}</h3>
                                 <p className={styles.releaseDate}>Data de lançamento: {book.volumeInfo.publishedDate.split("-").reverse().join("/")}</p>
+                                <p className={styles.bookPrice}>Preço: R$ {book.price},99</p>
                             </div>
 
                             <button className={styles.button} onClick={() => handleChangeShoppingCart(book)}>

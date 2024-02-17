@@ -10,7 +10,8 @@ interface VolumeProps {
 
 export interface Book {
     id: string,
-    volumeInfo: VolumeProps
+    volumeInfo: VolumeProps,
+    price?: number
 }
 
 export interface BookResponse {
