@@ -80,7 +80,14 @@ export function BooksPage(): JSX.Element {
                             )}
                             <div className={styles.bookInfoContainer}>
                                 <h3 className={styles.bookTitle}>{book.volumeInfo.title}</h3>
-                                <p className={styles.releaseDate}>Data de lançamento: {book.volumeInfo.publishedDate.split("-").reverse().join("/")}</p>
+                                <p className={styles.releaseDate}>
+                                    {book.volumeInfo.publishedDate ? 
+                                        <span>Data de lançamento: {book.volumeInfo.publishedDate.split("-").reverse().join("/")}</span>
+                                        :
+                                        <span>Data indisponível</span>
+                                    }
+                                    
+                                </p>
                                 <p className={styles.bookPrice}>Preço: R$ {book.price?.toString().replace(".", ",")}</p>
                             </div>
 

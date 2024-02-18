@@ -3,27 +3,38 @@
     width: 100%;
     color: var(--text-light);
     display: flex;
-    padding: 0 1rem;
-    height: 100px;
+    padding: 1rem;
+    min-height: 100px;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.title {
+    cursor: pointer;
 }
 
 .navbarContainer {
     display: flex;
     gap: 2rem;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    flex-grow: 1;
 }
 
 .searchContainer {
     display: flex;
     gap: 1rem;
-    height: 40px;
+    flex-grow: 1;
+    justify-content: flex-end;
 }
 
 .input {
     height: 40px;
-    width: 20rem;
+    max-width: 20rem;
+    width: 100%;
     padding: 0 0.5rem;
     outline: none;
     font-size: 1rem;
@@ -47,6 +58,7 @@
     width: 50px;
     position: relative;
     cursor: pointer;
+    align-self: flex-end;
 }
 
 .circleQttItems {
@@ -60,4 +72,15 @@
     align-items: center;
     justify-content: center;
     color: var(--text);
+}
+
+@media(max-width: 767px) {
+    .navbarContainer {
+        justify-content: flex-start;
+    }
+
+    .searchContainer {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
 }

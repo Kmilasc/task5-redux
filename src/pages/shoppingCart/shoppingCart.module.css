@@ -4,11 +4,11 @@
     flex-direction: column;
     align-items: center;
     max-width: 1440px;
-    background-color: var(--background);
+    margin: 0 auto;
 }
 
 .title {
-    margin: 2rem 0;
+    margin: 2rem 1rem;
 }
 
 .booksContainer {
@@ -16,7 +16,7 @@
     flex-direction: column;
     max-width: 1100px;
     gap: 2rem;
-    margin: 2.5rem 0;
+    margin: 2.5rem 1rem;
     
 }
 
@@ -32,6 +32,7 @@
 .imageContainer {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .image {
@@ -44,6 +45,11 @@
     flex-direction: column;
     justify-content: center;
     flex: 1;
+    gap: 1rem;
+}
+
+.bookTitle {
+    font-size: 1.25rem;
 }
 
 .priceContainer {
@@ -64,6 +70,7 @@
 
 .totalPrice {
     font-size: 1.25rem;
+    text-align: center;
 }
 
 .button {
@@ -81,4 +88,14 @@
 .button:hover {
     background-color: var(--text-light);
     color: var(--accent);
+}
+
+@media(max-width: 767px) {
+    .bookCard {
+        flex-direction: column;
+    }
+
+    .bookTitle {
+        font-size: 1rem;
+    }
 }

@@ -23,7 +23,7 @@ export function Header(): JSX.Element {
 
     return (
         <header className={styles.headerContainer}>
-            <h1>Livraria Online</h1>
+            <h1 className={styles.title} onClick={() => navigate("/home")}>Livraria Online</h1>
 
             <nav className={styles.navbarContainer}>
                 <form onSubmit={handleInputChange}  className={styles.searchContainer} >
