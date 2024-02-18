@@ -8,15 +8,16 @@ import { Header } from "../../components/header/Header";
 import { ShoppingCartCheckoutOutlined, Check } from "@mui/icons-material"
 import { calculateTotalPriceItems, decrementItem, incrementItem } from "../../services/slices/shoppingCartSlice";
 import { Book } from "../../interfaces/bookApiInterface";
+import { CircularProgress } from "@mui/material";
 
 export function BooksPage(): JSX.Element {
 
     const { data: booksList, error, isLoading } = useGetBooksQuery('technology');
     const { items: books, searchTerm, bookPrices } = useAppSelector((state: RootState) => state.books);
-    
+
     const { items, totalPrice } = useAppSelector((state: RootState) => state.shoppingCart);
     const dispatch = useAppDispatch();
-    
+
 
     useEffect(() => {
 
@@ -36,7 +37,7 @@ export function BooksPage(): JSX.Element {
 
 
     function handleChangeShoppingCart(book: Book): void {
-        if(!bookInCart(book.id)){
+        if (!bookInCart(book.id)) {
             dispatch(incrementItem(book));
         }
         else {
@@ -45,13 +46,17 @@ export function BooksPage(): JSX.Element {
         dispatch(calculateTotalPriceItems());
     }
 
-   
+
 
     const filteredBooks = books
         .filter(book => book.volumeInfo.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
-    if(isLoading) {
-        return <div>Loading...</div>
+    if (isLoading) {
+        return (
+            <div className={styles.loading}>
+                <CircularProgress />
+            </div>
+        )
     }
 
     return (
@@ -84,7 +89,7 @@ export function BooksPage(): JSX.Element {
                                     <Check /> :
                                     <span>Adicionar ao carrinho <ShoppingCartCheckoutOutlined /></span>
                                 }
-                               
+
                             </button>
                         </div>
                     ))}

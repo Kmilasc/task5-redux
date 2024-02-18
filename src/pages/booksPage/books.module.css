@@ -64,3 +64,10 @@
     align-items: center;
     gap: 0.75rem;
 }
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}

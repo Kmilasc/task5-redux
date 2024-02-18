@@ -1,6 +1,8 @@
+import { ToastContainer, toast } from 'react-toastify';
 import { useAppSelector } from '../../services/hooks/hooks';
 import { RootState } from '../../services/store/store';
 import styles from './shoppingCart.module.css';
+import 'react-toastify/dist/ReactToastify.min.css'; 
 
 export function ShoppingCart(): JSX.Element {
 
@@ -35,10 +37,14 @@ export function ShoppingCart(): JSX.Element {
                     </div>
                 ))}
 
-                <div>
-                    <p>Preço total a pagar: R$ {totalPrice.toFixed(2).replace(".", ",")}</p>
+                <div className={styles.priceContainer}>
+                    <p className={styles.totalPrice}>Preço total a pagar: R$ {totalPrice.toFixed(2).replace(".", ",")}</p>
+                    
+                    <button onClick={() => toast.success("Compra realizada com sucesso")} className={styles.button}>Confirmar compra</button>
                 </div>
             </section>
+            
+            <ToastContainer />
         </main>
     )
 }
