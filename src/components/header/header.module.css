@@ -1,0 +1,86 @@
+.headerContainer {
+    background-color: var(--second);
+    width: 100%;
+    color: var(--text-light);
+    display: flex;
+    padding: 1rem;
+    min-height: 100px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.title {
+    cursor: pointer;
+}
+
+.navbarContainer {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.searchContainer {
+    display: flex;
+    gap: 1rem;
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+
+.input {
+    height: 40px;
+    max-width: 20rem;
+    width: 100%;
+    padding: 0 0.5rem;
+    outline: none;
+    font-size: 1rem;
+}
+
+.button {
+    height: 40px;
+    width: 10rem;
+    border: none;
+    cursor: pointer;
+    background-color: var(--accent);
+    color: var(--text-light);
+    border-radius: 8px;
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
+.shoppingCartIconContainer {
+    display: flex;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.circleQttItems {
+    width: 24px;
+    height: 24px;
+    background-color: var(--primary);
+    position: absolute;
+    border-radius: 50%;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+}
+
+@media(max-width: 767px) {
+    .navbarContainer {
+        justify-content: flex-start;
+    }
+
+    .searchContainer {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+}

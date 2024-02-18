@@ -1,5 +1,25 @@
+:root {
+  --text: #000000;
+  --text-light: #ffffff;
+  --background: #fafafa;
+  --primary: #EACA98;
+  --second: #754D27;
+  --accent: #4C3830;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-container, button, input {
+  font-family: "Inter", sans-serif;
+  background-color: var(--background);
 }
