@@ -12,17 +12,18 @@ import { Book } from "../../interfaces/bookApiInterface";
 export function BooksPage(): JSX.Element {
 
     const { data: booksList, error, isLoading } = useGetBooksQuery('technology');
-    const { items: books, searchTerm } = useAppSelector((state: RootState) => state.books);
+    const { items: books, searchTerm, bookPrices } = useAppSelector((state: RootState) => state.books);
     
     const { items, totalPrice } = useAppSelector((state: RootState) => state.shoppingCart);
     const dispatch = useAppDispatch();
+    
 
     useEffect(() => {
 
         if (booksList) {
             const booksWithPrices: Book[] = booksList.map(book => ({
                 ...book,
-                price: Math.floor(Math.random() * 50) + 0.99
+                price: bookPrices[book.id] || Math.floor(Math.random() * 50) + 0.99
             }))
 
             dispatch(setBooks(booksWithPrices));
@@ -44,10 +45,7 @@ export function BooksPage(): JSX.Element {
         dispatch(calculateTotalPriceItems());
     }
 
-    useEffect(() => {
-        console.log(items);
-        console.log(totalPrice);
-    }, [items, totalPrice]);
+   
 
     const filteredBooks = books
         .filter(book => book.volumeInfo.title.toLowerCase().includes(searchTerm.toLowerCase()));

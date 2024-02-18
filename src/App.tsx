@@ -3,6 +3,7 @@ import { BooksPage } from './pages/booksPage/BooksPage';
 import { LoginPage } from './pages/login/Login';
 import { RegisterPage } from './pages/register/RegisterPage';
 import { PrivateArea } from './layout/PrivateArea';
+import { ShoppingCart } from './pages/shoppingCart/ShoppingCart';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
 
           <Route path='/' element={<PrivateArea />}>
             <Route path='home' element={<BooksPage />} />
+            <Route path='shopping-cart' element={<ShoppingCart />} />
           </Route>
         </Routes>
       </BrowserRouter>

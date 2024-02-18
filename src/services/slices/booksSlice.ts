@@ -3,7 +3,8 @@ import { Book, BookResponse } from "../../interfaces/bookApiInterface";
 
 const initialState: BookResponse = {
     items: [],
-    searchTerm: ""
+    searchTerm: "",
+    bookPrices: {}
 }
 
 export const bookSlice = createSlice({
@@ -11,11 +12,17 @@ export const bookSlice = createSlice({
     initialState,
     reducers: {
         setBooks: (state, action: PayloadAction<Book[]>) => {
-            state.items = action.payload
+            state.items = action.payload;
+            
+            action.payload.forEach(book => {
+                if (book.price) {
+                    state.bookPrices[book.id] = book.price;
+                }
+            });
         },
         filterByName: (state, action: PayloadAction<string>) => {
             state.searchTerm = action.payload
-        }
+        },
     }
 });
 
