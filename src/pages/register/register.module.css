@@ -1,4 +1,13 @@
+.mainContainer {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .registerContainer {
+    background-color: #f3f3f3;
     align-self: center;
     max-width: 600px;
     min-width: 400px;
@@ -8,17 +17,7 @@
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
-    @media (max-width: 600px) {
-        & {
-            min-width: unset;
-        }
-    }
-
-    @media (max-width: 270px) {
-        & {
-            margin: 0 20px;
-        }
-    }
+    
 }
 
 .registerContainer h2 {
@@ -82,4 +81,16 @@ input {
 
 .loginLink a:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .registerContainer {
+        min-width: unset;
+    }
+}
+
+@media (max-width: 270px) {
+    .registerContainer {
+        margin: 0 20px;
+    }
 }
