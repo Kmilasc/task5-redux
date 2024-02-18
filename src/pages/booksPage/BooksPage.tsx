@@ -6,7 +6,7 @@ import { setBooks } from "../../services/slices/booksSlice";
 import styles from './books.module.css';
 import { Header } from "../../components/header/Header";
 import { ShoppingCartCheckoutOutlined, Check } from "@mui/icons-material"
-import { decrementItem, incrementItem } from "../../services/slices/shoppingCartSlice";
+import { calculateTotalPriceItems, decrementItem, incrementItem } from "../../services/slices/shoppingCartSlice";
 import { Book } from "../../interfaces/bookApiInterface";
 
 export function BooksPage(): JSX.Element {
@@ -14,7 +14,7 @@ export function BooksPage(): JSX.Element {
     const { data: booksList, error, isLoading } = useGetBooksQuery('technology');
     const { items: books, searchTerm } = useAppSelector((state: RootState) => state.books);
     
-    const { items } = useAppSelector((state: RootState) => state.shoppingCart);
+    const { items, totalPrice } = useAppSelector((state: RootState) => state.shoppingCart);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -22,7 +22,7 @@ export function BooksPage(): JSX.Element {
         if (booksList) {
             const booksWithPrices: Book[] = booksList.map(book => ({
                 ...book,
-                price: Math.floor(Math.random() * 50)
+                price: Math.floor(Math.random() * 50) + 0.99
             }))
 
             dispatch(setBooks(booksWithPrices));
@@ -41,19 +41,23 @@ export function BooksPage(): JSX.Element {
         else {
             dispatch(decrementItem(book.id));
         }
+        dispatch(calculateTotalPriceItems());
     }
 
     useEffect(() => {
         console.log(items);
-    }, [items])
+        console.log(totalPrice);
+    }, [items, totalPrice]);
 
     const filteredBooks = books
         .filter(book => book.volumeInfo.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
+    if(isLoading) {
+        return <div>Loading...</div>
+    }
 
     return (
         <>
-            {isLoading && <div>Loading...</div>}
 
             <Header />
 
@@ -74,7 +78,7 @@ export function BooksPage(): JSX.Element {
                             <div className={styles.bookInfoContainer}>
                                 <h3 className={styles.bookTitle}>{book.volumeInfo.title}</h3>
                                 <p className={styles.releaseDate}>Data de lançamento: {book.volumeInfo.publishedDate.split("-").reverse().join("/")}</p>
-                                <p className={styles.bookPrice}>Preço: R$ {book.price},99</p>
+                                <p className={styles.bookPrice}>Preço: R$ {book.price?.toString().replace(".", ",")}</p>
                             </div>
 
                             <button className={styles.button} onClick={() => handleChangeShoppingCart(book)}>

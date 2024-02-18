@@ -5,7 +5,9 @@ import { Book } from "../../interfaces/bookApiInterface";
 const initialState: ShoppingCart = {
     inCart: false,
     quantity: 0,
-    items: []
+    items: [],
+    totalPrice: 0
+
 }
 
 export const shoppingCartSlice = createSlice({
@@ -19,9 +21,12 @@ export const shoppingCartSlice = createSlice({
         decrementItem: (state, action: PayloadAction<string>) => {
             state.items = state.items.filter(item => item.id !== action.payload);
             state.quantity = state.quantity - 1;
+        },
+        calculateTotalPriceItems: (state) => {
+            state.totalPrice = state.items.reduce((acc, currentPrice) => acc + currentPrice.price!, 0)
         }
     }
 });
 
-export const { incrementItem, decrementItem } = shoppingCartSlice.actions;
+export const { incrementItem, decrementItem, calculateTotalPriceItems } = shoppingCartSlice.actions;
 export default shoppingCartSlice.reducer;
