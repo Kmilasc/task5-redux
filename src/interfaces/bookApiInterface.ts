@@ -17,5 +17,8 @@ export interface Book {
 export interface BookResponse {
     items: Book[],
     searchTerm: string
+    bookPrices: { 
+        [id: string]: number
+    }
 }
 

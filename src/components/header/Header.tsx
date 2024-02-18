@@ -5,12 +5,14 @@ import { RootState } from '../../services/store/store';
 import styles from './header.module.css';
 import { ShoppingCart } from '@mui/icons-material'
 import { filterByName } from '../../services/slices/booksSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 export function Header(): JSX.Element {
 
     const quantityItems = useAppSelector((state: RootState) => state.shoppingCart.quantity);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const [searchValue, setSearchValue] = useState('');
 
@@ -21,7 +23,7 @@ export function Header(): JSX.Element {
 
     return (
         <header className={styles.headerContainer}>
-            <h1>Livraria Online</h1>
+            <h1 className={styles.title} onClick={() => navigate("/home")}>Livraria Online</h1>
 
             <nav className={styles.navbarContainer}>
                 <form onSubmit={handleInputChange}  className={styles.searchContainer} >
@@ -29,7 +31,7 @@ export function Header(): JSX.Element {
                     <button className={styles.button} type='submit'>Pesquisar</button>
                 </form>
 
-                <div className={styles.shoppingCartIconContainer}>
+                <div onClick={() => navigate("/shopping-cart")} className={styles.shoppingCartIconContainer}>
                     <span className={styles.circleQttItems}>{quantityItems}</span>
                     <ShoppingCart sx={{ width: 50, height: 50 }} />
                 </div>

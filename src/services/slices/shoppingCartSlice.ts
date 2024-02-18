@@ -24,9 +24,14 @@ export const shoppingCartSlice = createSlice({
         },
         calculateTotalPriceItems: (state) => {
             state.totalPrice = state.items.reduce((acc, currentPrice) => acc + currentPrice.price!, 0)
+        },
+        clearShoppingCart: (state) => {
+            state.items = [];
+            state.totalPrice = 0;
+            state.quantity = 0;
         }
     }
 });
 
-export const { incrementItem, decrementItem, calculateTotalPriceItems } = shoppingCartSlice.actions;
+export const { incrementItem, decrementItem, calculateTotalPriceItems, clearShoppingCart } = shoppingCartSlice.actions;
 export default shoppingCartSlice.reducer;
